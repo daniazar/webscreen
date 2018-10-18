@@ -1,7 +1,7 @@
 {
-  "name": "puppeteer-scrapper",
+  "name": "web-screener",
   "version": "1.0.0",
-  "description": "a web scrapper using puppeteer",
+  "description": "a website screenshot generator using pupetter and a JSON file. Intended to be used in combination as command line tool to generate images of of components before commit.",
   "main": "index.js",
   "scripts": {
     "start": "npm run compile",
@@ -12,12 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "puppeteer": "^1.9.0",
-    "ts-node": "^4.1.0",
-    "tsd": "^0.6.5",
-    "typescript": "^2.9.2"
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.3"
   },
   "devDependencies": {
-    "@types/node": "^9.6.35",
-    "@types/puppeteer": "^1.9.0"
+    "@types/node": "^10.12.0",
+    "@types/puppeteer": "^1.9.0",
+    "tslint": "^5.11.0"
   }
 }
