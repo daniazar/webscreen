@@ -1,12 +1,19 @@
 [
-        {"url": "https://github.com/",
+    {
+        "url": "https://github.com/",
         "name": "github",
         "fullPage": true,
-        "settings": {
-            
-        },
+        "settings": {},
         "elements": [
             ".home-hero-signup"
+        ]
+    },
+    {
+        "url": "https://google.com/",
+        "settings": {},
+        "elements": [
+            ".content",
+            "#gws-output-pages-elements-homepage_additional_languages__als"
         ]
     }
 ]

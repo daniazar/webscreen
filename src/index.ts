@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import * as fs from "fs";
 import { Browser, launch } from "puppeteer";
+var filenamifyUrl = require('filenamify-url');
+var filenamify = require('filenamify');
 
 class Main {
   browser: Browser;
@@ -33,7 +35,7 @@ class Main {
         let el = await page.$(element);
         console.log(el);
         if (el) {
-          await el.screenshot({ path: "screenshots/" + name + " " + element + ".jpg", type: "jpeg" });
+          await el.screenshot({ path: "screenshots/" + name + " " + filenamify(element) + ".jpg", type: "jpeg" });
         }
       }));
     }
@@ -42,7 +44,7 @@ class Main {
 
   async processPages() {
     await Promise.all(this.urls.map(async (url) => {
-      await this.parsePage(url.url, url.name ? url.name : url.url, url.fullPage ? url.fullPage : false, url.elements);
+      await this.parsePage(url.url, url.name ? url.name : filenamifyUrl(url.url), url.fullPage ? url.fullPage : false, url.elements);
     }));
     await this.browser.close();
   }
