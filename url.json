@@ -1,0 +1,12 @@
+[
+        {"url": "https://github.com/",
+        "name": "github",
+        "fullPage": true,
+        "settings": {
+            
+        },
+        "elements": [
+            ".home-hero-signup"
+        ]
+    }
+]
