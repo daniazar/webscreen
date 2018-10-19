@@ -30,14 +30,14 @@ class Main {
     const capturePage = input.capturePage;
     const extension = input.extension;
     const viewport = input.viewport;
-
+    const omitBackground = url.omitBackground;
     const page = await this.browser.newPage();
     await page.setViewport(viewport);
     //page.random_useragent();
     await page.goto(url);
 
     if (capturePage) {
-      await page.screenshot({ path: "screenshots/" + name + "." + extension, fullPage: fullPage, type: extension });
+      await page.screenshot({ path: "screenshots/" + name + "." + extension, fullPage: fullPage, type: extension, omitBackground: omitBackground });
     }
 
     if (elements) {
@@ -45,7 +45,7 @@ class Main {
         let el = await page.$(element);
         console.log(el);
         if (el) {
-          await el.screenshot({ path: "screenshots/" + name + " " + filenamify(element) + "." + extension, type: extension });
+          await el.screenshot({ path: "screenshots/" + name + " " + filenamify(element) + "." + extension, type: extension, omitBackground: omitBackground });
         }
       }));
     }
@@ -57,6 +57,7 @@ class Main {
       url.name = url.name ? url.name : filenamifyUrl(url.url);
       url.fullPage = url.fullPage ? url.fullPage : false;
       url.extension = url.extension ? url.extension : "png";
+      url.omitBackground = url.omitBackground ? url.omitBackground : false;
       url.viewport = url.viewport ? url.viewport : {
         width: 800,
         height: 600
