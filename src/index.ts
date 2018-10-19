@@ -21,21 +21,31 @@ class Main {
     this.urls = JSON.parse(rawdata.toString());
   }
 
-  async parsePage(url, name, fullPage, elements) {
+  async parsePage(input) {
+
+    const url = input.url;
+    const name = input.name;
+    const fullPage = input.fullPage;
+    const elements = input.elements;
+    const capturePage = input.capturePage;
+    const extension = input.extension;
+    const viewport = input.viewport;
 
     const page = await this.browser.newPage();
-
+    await page.setViewport(viewport);
     //page.random_useragent();
     await page.goto(url);
 
-    await page.screenshot({ path: "screenshots/" + name + ".jpg", fullPage: fullPage, type: "jpeg" });
+    if (capturePage) {
+      await page.screenshot({ path: "screenshots/" + name + "." + extension, fullPage: fullPage, type: extension });
+    }
 
     if (elements) {
       await Promise.all(elements.map(async (element) => {
         let el = await page.$(element);
         console.log(el);
         if (el) {
-          await el.screenshot({ path: "screenshots/" + name + " " + filenamify(element) + ".jpg", type: "jpeg" });
+          await el.screenshot({ path: "screenshots/" + name + " " + filenamify(element) + "." + extension, type: extension });
         }
       }));
     }
@@ -44,7 +54,16 @@ class Main {
 
   async processPages() {
     await Promise.all(this.urls.map(async (url) => {
-      await this.parsePage(url.url, url.name ? url.name : filenamifyUrl(url.url), url.fullPage ? url.fullPage : false, url.elements);
+      url.name = url.name ? url.name : filenamifyUrl(url.url);
+      url.fullPage = url.fullPage ? url.fullPage : false;
+      url.extension = url.extension ? url.extension : "png";
+      url.viewport = url.viewport ? url.viewport : {
+        width: 800,
+        height: 600
+      }
+      url.viewport.width = url.viewport.width ? url.viewport.width : 800;
+      url.viewport.height = url.viewport.height ? url.viewport.height : 600;
+      await this.parsePage(url);
     }));
     await this.browser.close();
   }

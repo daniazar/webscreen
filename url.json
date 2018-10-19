@@ -3,14 +3,20 @@
         "url": "https://github.com/",
         "name": "github",
         "fullPage": true,
-        "settings": {},
+        "capturePage": true,
         "elements": [
             ".home-hero-signup"
-        ]
+        ],
+        "extension": "jpeg"
     },
     {
         "url": "https://google.com/",
-        "settings": {},
+        "viewport": {
+            "width": 300,
+            "height": 400
+        },
+                "capturePage": true,
+                
         "elements": [
             ".content",
             "#gws-output-pages-elements-homepage_additional_languages__als"
